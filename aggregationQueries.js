@@ -6,6 +6,8 @@ db.users.aggregate([
 {$project:{_id: 0}}
 ])
 
+//or
+
 db.users.aggregate([
 {$match: {"company.name":"TCS"}},
 {$group: {"_id":null,"TotalSalary":{$sum: "$salary"}}},
@@ -18,6 +20,8 @@ db.users.aggregate([
 {$group: {"_id":{companyName : "$company.name"},"TotalSalary":{$sum: "$salary"}}},
 {$project:{_id: 0}}
 ])
+
+//or
 
 db.users.aggregate([
 {$match: {"company.name": {$in:['TCS','CTS']}}},

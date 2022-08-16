@@ -6,12 +6,22 @@ db.users.aggregate([
 {$project:{_id: 0}}
 ])
 
+db.users.aggregate([
+{$match: {"company.name":"TCS"}},
+{$group: {"_id":null,"TotalSalary":{$sum: "$salary"}}},
+])
+
 // 2. Get total money spent by TCS & CTS as salary.
  
 db.users.aggregate([
 {$match: {"company.name": {$in:['TCS','CTS']}}},
 {$group: {"_id":{companyName : "$company.name"},"TotalSalary":{$sum: "$salary"}}},
 {$project:{_id: 0}}
+])
+
+db.users.aggregate([
+{$match: {"company.name": {$in:['TCS','CTS']}}},
+{$group: {"_id":null,"TotalSalary":{$sum: "$salary"}}},
 ])
 
 // 3.Get total money spent by individual company as salary.

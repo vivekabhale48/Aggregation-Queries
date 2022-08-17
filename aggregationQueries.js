@@ -108,6 +108,13 @@ db.users.aggregate([
 {$project: {"Skills":"$skills","Name":"$name",_id:0}}
 ])
 
+//or
+
+db.users.aggregate([
+{ $project: {skills: 1, name: 1 }},
+{ $unwind: "$skills" }
+])
+
 // 15. How many people are online in each company?
 
 db.users.aggregate([
